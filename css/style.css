@@ -1,0 +1,211 @@
+* {
+      box-sizing: border-box;
+}
+/* font-family: 'Roboto', sans-serif; для одного места в сайте*/
+body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      margin: 0;
+      padding-left: 70px;
+      padding-top: 42px;
+      padding-right: 70px;
+      padding-bottom: 100px;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+}
+
+a {
+      text-decoration:none
+}
+
+#back-to-main-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+}
+
+h1 {
+      color: #D04F4F;
+      margin-top: 5px;
+      font-family: "DM Sans", sans-serif;
+}
+
+#search {
+      width: 100%;
+}
+
+#form {
+      display: flex;
+      position: relative;
+}
+
+#search-input {
+      width: 100%;
+      background: #E7E7E7;
+      color: #ADADAD;
+      height: 49px;
+      border: none;
+      padding: 15px;
+      font-size: 15px;
+      font-family: 'Lato',sans-serif;;
+      border-radius: 5px;
+      -webkit-border-radius:;
+      -moz-border-radius:;
+      -ms-border-radius:;
+      -o-border-radius:;
+}
+
+#search-btn {
+      position: absolute;
+      height: 35px;
+      width: 35px;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      right: 8px;
+      top: 13px;
+}
+#search-btn i {
+      height: 100%;
+      width: 100%;
+      font-size: 22px;
+}
+
+.fa-magnifying-glass {
+      height: 100%;
+      width: 100%;
+}
+
+#filtres {
+      display: flex;
+      justify-content: flex-start;
+      gap: 15px;
+      margin-top: 20px;
+      margin-bottom: 60px;
+}
+
+.box-input {
+      position: relative;
+}
+
+.search-filtres {
+      display: flex;
+      position: relative;
+      width: 130px;
+      font-size: 15px;
+      font-weight: 700;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+}
+
+#filtres input{
+      font-family: 'Lato', sans-serif;;
+}
+
+.fa-chevron-down{
+      position: absolute;
+      color: white;
+      right: 12px;
+      top: 16px;
+}
+
+.search-filtres::placeholder {
+      color: white;
+}
+
+#search-ingredient {
+      background-color: #3282F7;
+}
+
+#search-appareiles {
+      background-color: #68D9A4;
+}
+
+#search-diches {
+      background-color: #ED6454;
+}
+
+#recipes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+}
+
+#carte-recipe {
+      display: flex;
+      flex-direction: column;
+      width: 380px;
+      height: 280px;
+}
+
+#carte-recipe img {
+      background-color: #ADADAD;
+      width: 100%;
+      height: 50%;
+}
+
+#text-of-recipe {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      height: 50%;
+      width: 100%;
+      background-color: #E7E7E7;
+}
+
+#name-and-time {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+}
+
+#name-and-time h2{
+      font-size: 16px;
+      font-weight: 400;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: 0;
+}
+
+#name-and-time span{
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 5px;
+      font-weight: 700;
+      font-size: 15px;
+      white-space: nowrap;
+}
+
+#ingredients-and-description {
+      display: flex;
+      flex-wrap: nowrap;
+      font-size: 11px;
+      gap: 15px;
+      height: 100%;
+}
+
+#ingredients-and-description p {
+      width: 50%;
+      margin: 0;
+}
+
+#description-p {
+      padding-top: 14px;
+}
