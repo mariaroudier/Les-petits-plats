@@ -45,7 +45,7 @@ h1 {
 #search-input {
       width: 100%;
       background: #E7E7E7;
-      color: #ADADAD;
+      color: black
       height: 49px;
       border: none;
       padding: 15px;
@@ -56,6 +56,9 @@ h1 {
       -moz-border-radius:;
       -ms-border-radius:;
       -o-border-radius:;
+}
+#search-input::placeholder {
+      color: #ADADAD;
 }
 
 #search-btn {

@@ -10,7 +10,7 @@ export default class Recipe{
             this.appliance = data.appliance
             this.ustensils = data.ustensils
       }
-      getRecipeDOM(){
+      getRecipeDOM(){ // заполнить карточку с рецептом
           
             const article = document.createElement( 'article' )
                   article.id = "carte-recipe"
@@ -42,30 +42,26 @@ export default class Recipe{
                         ingredientsAndDescription.appendChild(ingredientsP)
                         ingredientsAndDescription.appendChild(descriptionP)
       
-            // couper les strings - tried to make a function but it did not work
+            // couper le texte
             if (descriptionP.textContent.length > 130) {
                   const newStr = descriptionP.textContent.substring(0,130)
                   descriptionP.textContent = `${newStr}...`
             } 
             
-            const stringIngred = []
+            // отобразить правильно ингредиенты в описании
+            const stringIngredient = []
             this.ingredients.forEach((ingred) => {
                         if(ingred.hasOwnProperty('quantity') == true && ingred.hasOwnProperty('unit') == true) {
-                              stringIngred.push(`<br/>${ingred.ingredient}: ${ingred.quantity} ${ingred.unit}`)
+                              stringIngredient.push(`<br/>${ingred.ingredient}: ${ingred.quantity} ${ingred.unit}`)
                         } else if(ingred.hasOwnProperty('quantity') == true && ingred.hasOwnProperty('ingredient') == true) {
-                              stringIngred.push(`<br/>${ingred.ingredient}: ${ingred.quantity}`)
+                              stringIngredient.push(`<br/>${ingred.ingredient}: ${ingred.quantity}`)
                         } else if(ingred.hasOwnProperty('ingredient') == true) {
-                              stringIngred.push(`<br/>${ingred.ingredient}`)
+                              stringIngredient.push(`<br/>${ingred.ingredient}`)
                         } 
-                  //ingredientsP.textContent = ingred.ingredient
-                  ingredientsP.innerHTML = stringIngred
-                 
+                  ingredientsP.innerHTML = stringIngredient
             })
-      
-      
-      
             return article;
-          }
+      }
 
 
 }
