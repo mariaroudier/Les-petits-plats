@@ -1,7 +1,7 @@
 export const recipes = [
     {
         "id": 1,
-        name : "Limonade de Coco",
+        "name" : "Limonade de Coco",
         "servings" : 1,
         "ingredients": [
             {

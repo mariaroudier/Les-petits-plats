@@ -45,17 +45,17 @@ h1 {
 #search-input {
       width: 100%;
       background: #E7E7E7;
-      color: black
+      color: black;
       height: 49px;
       border: none;
       padding: 15px;
       font-size: 15px;
-      font-family: 'Lato',sans-serif;;
+      font-family: 'Lato',sans-serif;
       border-radius: 5px;
-      -webkit-border-radius:;
-      -moz-border-radius:;
-      -ms-border-radius:;
-      -o-border-radius:;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
 }
 #search-input::placeholder {
       color: #ADADAD;

@@ -9,9 +9,9 @@ export default class Recipe{
             this.description = data.description
             this.appliance = data.appliance
             this.ustensils = data.ustensils
+            
       }
       getRecipeDOM(){ // заполнить карточку с рецептом
-          
             const article = document.createElement( 'article' )
                   article.id = "carte-recipe"
                   const photo = document.createElement( 'img' )
@@ -41,7 +41,7 @@ export default class Recipe{
                   textOfRecipe.appendChild(ingredientsAndDescription)
                         ingredientsAndDescription.appendChild(ingredientsP)
                         ingredientsAndDescription.appendChild(descriptionP)
-      
+
             // couper le texte
             if (descriptionP.textContent.length > 130) {
                   const newStr = descriptionP.textContent.substring(0,130)
@@ -62,6 +62,5 @@ export default class Recipe{
             })
             return article;
       }
-
 
 }
