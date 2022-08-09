@@ -1,7 +1,7 @@
 export const recipes = [
     {
         "id": 1,
-        "name" : "Limonade de Coco",
+        "name" : "Limonade de coco",
         "servings" : 1,
         "ingredients": [
             {
@@ -34,11 +34,11 @@ export const recipes = [
     },
     {
         "id": 2,
-        "name" : "Poisson Cru à la tahitienne",
+        "name" : "Poisson cru à la tahitienne",
         "servings": 2,
         "ingredients": [
             {
-                "ingredient" : "Thon Rouge (ou blanc)",
+                "ingredient" : "Thon rouge (ou blanc)",
                 "quantity" : 200,
                 "unit" : "grammes"
             },
@@ -55,17 +55,17 @@ export const recipes = [
                 "quantity" : 1
             },
             {
-                "ingredient" : "Citron Vert",
+                "ingredient" : "Citron vert",
                 "quantity" : 5
             },
             {
-                "ingredient" : "Lait de Coco",
+                "ingredient" : "Lait de coco",
                 "quantity" : 100,
                 "unit" : "ml"
             }
         ],
         "time": 60,
-        "description": "Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2 heures. (Si possible faites-le le soir pour le lendemain. Après avoir laissé mariner le poisson, coupez le concombre en fines rondelles sans la peau et les tomates en prenant soin de retirer les pépins. Rayer la carotte. Ajouter les légumes au poissons avec le citron cette fois ci dans un Saladier. Ajouter le lait de coco. Pour ajouter un peu plus de saveur vous pouver ajouter 1 à 2 cuillères à soupe de Crème de coco",
+        "description": "Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2 heures. (Si possible faites-le le soir pour le lendemain. Après avoir laissé mariner le poisson, coupez le concombre en fines rondelles sans la peau et les tomates en prenant soin de retirer les pépins. Rayer la carotte. Ajouter les légumes au poissons avec le citron cette fois ci dans un Saladier. Ajouter le lait de coco. Pour ajouter un peu plus de saveur vous pouver ajouter 1 à 2 cuillères à soupe de crème de coco",
         "appliance": "Saladier",
         "ustensils": ["presse citron"]
     },
@@ -164,7 +164,7 @@ export const recipes = [
                 "quantity": 2
            },
            {
-               "ingredient": "Crème fraiche",
+               "ingredient": "Crème fraîche",
                "quantity": 2,
                "unit": "cuillères à soupe"
            },
@@ -427,7 +427,7 @@ export const recipes = [
         ],
         "time": 40,
         "description": "Éplucher les fruits et les couper en morceaux, les mettre dans une casserolle en ajoutant l'eau et le sucre vanillé. Laisser cuire 15 minutes en remuant régulièrement.",
-        "appliance": "Casserole",
+        "appliance": "Casserolle",
         "ustensils": ["couteau", "économe"]
     },
     {
@@ -441,8 +441,6 @@ export const recipes = [
                 "quantity": 60,
                 "unit": "grammes"
             },
-
-
 
             {
                 "ingredient": "Pommes de terre",
@@ -467,7 +465,7 @@ export const recipes = [
         ],
         "time":40,
         "description":"Cuire les pommes de terre environ 30 minutes. Découper les échalottes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olive et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
-        "appliance": "Casserole",
+        "appliance": "Casserolle",
         "ustensils":["couteau","saladier","cuillère en bois"]
     },
     {
@@ -748,7 +746,7 @@ export const recipes = [
         ],
         "time": 30,
         "description":"Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Serivir.",
-        "appliance": "Casserolle.",
+        "appliance": "Casserolle",
         "ustensils":["Cuillère en bois", "louche", "couteau"]
     },
     {

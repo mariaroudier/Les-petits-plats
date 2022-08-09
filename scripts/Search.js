@@ -5,93 +5,80 @@ export default class Search {
             
       }
 
-      
-
       toSearchRecipe(inputValue) {
             this.input = inputValue // не удалять
-            let recipes = []
+            let recipesArray = []
+            let ingredientsInRecipe = [] // all ingredients of all recipes
+            let matchedAppareils = [] // подходящие аппареи
+            let matchedUstensils = [] //  подходящая посуда
+            let matchedIngredients = []
+            
             document.getElementById('recipes-grid').innerHTML = ''
-            document.getElementById('all-ingredients').innerHTML = ''
+            
+            // matching le recipe avec input (titre, description, ingredients)
             if(this.input.length >= 3) {
                   this.recipes.forEach(recipe => {
-                        let arrayOfIngredients = [];
-                        recipe.ingredients.forEach(elemIngredient => {
-                              arrayOfIngredients.push(elemIngredient.ingredient)
+                        recipe.ingredients.forEach(elem => {
+                              ingredientsInRecipe.push(elem.ingredient)
                         })
-
-                        // search matching
-                        if(recipe.name.toLowerCase().match(inputValue) || recipe.description.toLowerCase().match(inputValue) || arrayOfIngredients.toString().toLowerCase().match(inputValue) ) {
-                              recipes.push(recipe)
+                        
+                        if(recipe.name.toLowerCase().match(inputValue) || recipe.description.toLowerCase().match(inputValue) || ingredientsInRecipe.toString().toLowerCase().match(inputValue)) {
+                              recipesArray.push(recipe)
+                              matchedAppareils.push(recipe.appliance)
+                              matchedUstensils.push(recipe.ustensils)
+                              recipe.ingredients.forEach(elem => {
+                                    matchedIngredients.push(elem.ingredient)
+                              })
                         }
-
+                  
                   });
-            } else {
-                  recipes = this.recipes
+                  
+            } else { // si input.length < 3
+                  recipesArray = this.recipes
             }
-            recipes.forEach(recipe => { 
+           
+
+            // collecter les ingreients de recipes choisis dans le conteiner
+            recipesArray.forEach(recipe => { 
                   document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-                  recipe.ingredients.forEach(ingredient => {
-                        let span = document.createElement('span')
-                        span.textContent = ingredient.ingredient
-                        document.getElementById('all-ingredients').appendChild(span)
+
+            })
+
+            // Set ingredients
+            const setIngredients = new Set(matchedIngredients)
+            document.getElementById('all-ingredients').innerHTML = ''
+            setIngredients.forEach(elem => {
+                        let spanIngredient = document.createElement('span')
+                        spanIngredient.textContent = elem
+                        document.getElementById('all-ingredients').appendChild(spanIngredient)
+                        
+                  })
+            
+            // Set appareiles
+            const setAppareils = new Set(matchedAppareils)
+            document.getElementById('all-appareils').innerHTML = ''
+            setAppareils.forEach(appareil => {
+                  let spanAppareil = document.createElement('span')
+                  spanAppareil.textContent = appareil
+                  document.getElementById('all-appareils').appendChild(spanAppareil)
+            })
+
+            // Set ustensiles
+            let subUtensil = []
+            matchedUstensils.forEach(elem => {
+                  elem.forEach(subElem => {
+                        subUtensil.push(subElem)
                   })
             })
+
+            const setUstensils = new Set(subUtensil)
+            document.getElementById('all-diches').innerHTML = ''
+            setUstensils.forEach(ustensil => {
+                  let spanUstensil = document.createElement('span')
+                  spanUstensil.textContent = ustensil
+                  document.getElementById('all-diches').appendChild(spanUstensil)  
+            })
             
-
-      }
-
-      toSearchIngredient(inputValue) {
-            this.input = inputValue // не удалять
-           
-            if(this.input.length >= 3) {
-                  document.getElementById('recipes-grid').innerHTML = ''
-                  this.recipes.forEach(recipe => {
-                        // to get les ingredients
-                        let arrayOfIngredients = []
-                        recipe.ingredients.forEach(elemIngredient => {
-                              arrayOfIngredients.push(elemIngredient.ingredient)
-                        })
-
-                        if(arrayOfIngredients.toString().toLowerCase().match(inputValue)) {
-                              document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-                        }
-                  });
-                  return document.getElementById('recipes-grid')
-            }
-
-
-      }
-
-      toSearchAppareil(inputValue) {
-            this.input = inputValue // не удалять
-
-            if(this.input.length >= 3) {
-                  document.getElementById('recipes-grid').innerHTML = ''
-                  this.recipes.forEach(recipe => {
-                        if(recipe.appliance.toString().match(inputValue)) {
-                              document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-                        }
-                  });
-                  return document.getElementById('recipes-grid')
-
-
-            }
-      }
-
-      toSearchUstensil(inputValue) {
-            this.input = inputValue // не удалять
-
-            if(this.input.length >= 3) {
-                  document.getElementById('recipes-grid').innerHTML = ''
-                  this.recipes.forEach(recipe => {
-                        if(recipe.ustensils.toString().toLowerCase().match(inputValue)) {
-                              document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-                        }
-                  });
-                  return document.getElementById('recipes-grid')
-
-
-            }
       }
 
 }
