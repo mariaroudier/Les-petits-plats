@@ -6,23 +6,22 @@ export default class Search {
       }
 
       toSearchRecipe(inputValue) {
-            this.input = inputValue // не удалять
+            this.input = inputValue
             let recipesArray = []
-            let ingredientsInRecipe = [] // all ingredients of all recipes
-            let matchedAppareils = [] // подходящие аппареи
-            let matchedUstensils = [] //  подходящая посуда
+            let matchedAppareils = []
+            let matchedUstensils = []
             let matchedIngredients = []
+            let spans = []
             
             document.getElementById('recipes-grid').innerHTML = ''
-            
             // matching le recipe avec input (titre, description, ingredients)
             if(this.input.length >= 3) {
                   this.recipes.forEach(recipe => {
+                        let ingredientsInRecipe = []
                         recipe.ingredients.forEach(elem => {
                               ingredientsInRecipe.push(elem.ingredient)
                         })
-                        
-                        if(recipe.name.toLowerCase().match(inputValue) || recipe.description.toLowerCase().match(inputValue) || ingredientsInRecipe.toString().toLowerCase().match(inputValue)) {
+                        if(recipe.name.toLowerCase().includes(inputValue) || recipe.description.toLowerCase().includes(inputValue) || ingredientsInRecipe.toString().toLowerCase().includes(inputValue)) {
                               recipesArray.push(recipe)
                               matchedAppareils.push(recipe.appliance)
                               matchedUstensils.push(recipe.ustensils)
@@ -35,6 +34,14 @@ export default class Search {
                   
             } else { // si input.length < 3
                   recipesArray = this.recipes
+                  recipesArray.forEach(recipe => {
+                        matchedAppareils.push(recipe.appliance)
+                        matchedUstensils.push(recipe.ustensils)
+                        recipe.ingredients.forEach(elem => {
+                              matchedIngredients.push(elem.ingredient)
+                        })
+                  })
+                  
             }
            
 
@@ -48,11 +55,13 @@ export default class Search {
             const setIngredients = new Set(matchedIngredients)
             document.getElementById('all-ingredients').innerHTML = ''
             setIngredients.forEach(elem => {
-                        let spanIngredient = document.createElement('span')
-                        spanIngredient.textContent = elem
-                        document.getElementById('all-ingredients').appendChild(spanIngredient)
+                  let spanIngredient = document.createElement('span')
+                  spanIngredient.textContent = elem
+                  spanIngredient.classList = 'span'
+                  spans.push(spanIngredient)
+                  document.getElementById('all-ingredients').appendChild(spanIngredient)
                         
-                  })
+            })
             
             // Set appareiles
             const setAppareils = new Set(matchedAppareils)
@@ -60,6 +69,8 @@ export default class Search {
             setAppareils.forEach(appareil => {
                   let spanAppareil = document.createElement('span')
                   spanAppareil.textContent = appareil
+                  spanAppareil.classList = 'span'
+                  spans.push(spanAppareil)
                   document.getElementById('all-appareils').appendChild(spanAppareil)
             })
 
@@ -72,13 +83,29 @@ export default class Search {
             })
 
             const setUstensils = new Set(subUtensil)
-            document.getElementById('all-diches').innerHTML = ''
+            document.getElementById('all-dishes').innerHTML = ''
             setUstensils.forEach(ustensil => {
                   let spanUstensil = document.createElement('span')
                   spanUstensil.textContent = ustensil
-                  document.getElementById('all-diches').appendChild(spanUstensil)  
+                  spanUstensil.classList = 'span'
+                  spans.push(spanUstensil)
+                  document.getElementById('all-dishes').appendChild(spanUstensil)  
             })
             
+            // ajouter choisi span dans le searche
+            spans.forEach(elem => {
+                  elem.addEventListener('click', () => {
+                        const boxForChosen = document.createElement('div')
+                              boxForChosen.classList = "box-for-chosen"
+                        const croix = document.createElement('span')
+                              croix.classList = "fa-regular fa-circle-xmark"
+                        document.getElementById('chosen').appendChild(boxForChosen)
+                        boxForChosen.appendChild(elem)
+                        boxForChosen.appendChild(croix)
+                        
+                  })
+            })
+
       }
 
 }
