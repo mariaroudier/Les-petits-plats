@@ -93,6 +93,8 @@ export default class Search {
             })
             
             // ajouter choisi span dans le searche
+            
+            
             spans.forEach(elem => {
                   elem.addEventListener('click', () => {
                         const boxForChosen = document.createElement('div')
@@ -102,9 +104,31 @@ export default class Search {
                         document.getElementById('chosen').appendChild(boxForChosen)
                         boxForChosen.appendChild(elem)
                         boxForChosen.appendChild(croix)
-                        
+                        // changer le couler de la boite
+                        if (matchedIngredients.includes(elem.textContent)) {
+                              boxForChosen.style.backgroundColor = "#3282F7"
+                        } else if (matchedAppareils.includes(elem.textContent)) {
+                              boxForChosen.style.backgroundColor = "#68D9A4"
+                        } else if (subUtensil.includes(elem.textContent)) {
+                              boxForChosen.style.backgroundColor = "#ED6454"
+                              
+                        }
+                        croix.addEventListener('click', () => {
+                              if(matchedIngredients.includes(elem.textContent)) {
+                                    document.getElementById('all-ingredients').appendChild(elem)
+                              } else if (matchedAppareils.includes(elem.textContent)) {
+                                    document.getElementById('all-appareils').appendChild(elem)
+                              }
+                              document.getElementById('chosen').removeChild(boxForChosen)
+                        })
                   })
+            
+
+                  
             })
+            
+
+
 
       }
 
