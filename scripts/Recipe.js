@@ -63,4 +63,17 @@ export default class Recipe{
             return article;
       }
 
+      hasAllIngredients(ingredients) {
+            let result = 0
+            ingredients.forEach(ingredient => {
+                  this.ingredients.forEach(elem => {
+                        if(elem.ingredient.toLowerCase().includes(ingredient.toLowerCase())) {
+                              result++
+                        }
+                  })
+
+            })
+            return result == ingredients.size
+      }
+      
 }

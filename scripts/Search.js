@@ -2,11 +2,16 @@ export default class Search {
       constructor(recipes) {
             this.recipes = recipes
             this.input = ''
-            
+            this.tagIngredients = new Set()
+            this.tagAppareils = new Set()
+            this.tagUstensils = new Set()
       }
 
-      toSearchRecipe(inputValue) {
-            this.input = inputValue
+
+      toSearchRecipe(inputValue = null) {
+            if(inputValue != null) {
+                  this.input = inputValue
+            }
             let recipesArray = []
             let matchedAppareils = []
             let matchedUstensils = []
@@ -23,33 +28,28 @@ export default class Search {
                         })
                         if(recipe.name.toLowerCase().includes(inputValue) || recipe.description.toLowerCase().includes(inputValue) || ingredientsInRecipe.toString().toLowerCase().includes(inputValue)) {
                               recipesArray.push(recipe)
-                              matchedAppareils.push(recipe.appliance)
-                              matchedUstensils.push(recipe.ustensils)
-                              recipe.ingredients.forEach(elem => {
-                                    matchedIngredients.push(elem.ingredient)
-                              })
                         }
-                  
                   });
-                  
             } else { // si input.length < 3
                   recipesArray = this.recipes
-                  recipesArray.forEach(recipe => {
-                        matchedAppareils.push(recipe.appliance)
-                        matchedUstensils.push(recipe.ustensils)
-                        recipe.ingredients.forEach(elem => {
-                              matchedIngredients.push(elem.ingredient)
-                        })
-                  })
-                  
             }
-           
+            let recipesTab = []
 
-            // collecter les ingreients de recipes choisis dans le conteiner
-            recipesArray.forEach(recipe => { 
-                  document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-
+            recipesArray.forEach(recipe => {
+                  if(recipe.hasAllIngredients(this.tagIngredients)) { // dobavit && avec ustensils etc
+                        recipesTab.push(recipe)
+                  }
             })
+
+            
+            recipesTab.forEach(recipe => {
+                  matchedAppareils.push(recipe.appliance)
+                  matchedUstensils.push(recipe.ustensils)
+                  recipe.ingredients.forEach(elem => {
+                        matchedIngredients.push(elem.ingredient)
+                  })
+            })
+
 
             // Set ingredients
             const setIngredients = new Set(matchedIngredients)
@@ -97,39 +97,54 @@ export default class Search {
             
             spans.forEach(elem => {
                   elem.addEventListener('click', () => {
+                        // design & fonctionalité
                         const boxForChosen = document.createElement('div')
                               boxForChosen.classList = "box-for-chosen"
                         const croix = document.createElement('span')
                               croix.classList = "fa-regular fa-circle-xmark"
                         document.getElementById('chosen').appendChild(boxForChosen)
-                        boxForChosen.appendChild(elem)
-                        boxForChosen.appendChild(croix)
-                        // changer le couler de la boite
+                              boxForChosen.appendChild(elem)
+                              boxForChosen.appendChild(croix)
+
+
+
+                              // changer le couler de la boite
                         if (matchedIngredients.includes(elem.textContent)) {
                               boxForChosen.style.backgroundColor = "#3282F7"
+                              this.tagIngredients.add(elem.textContent)
                         } else if (matchedAppareils.includes(elem.textContent)) {
                               boxForChosen.style.backgroundColor = "#68D9A4"
+                              this.tagAppareils.add(elem.textContent)
                         } else if (subUtensil.includes(elem.textContent)) {
                               boxForChosen.style.backgroundColor = "#ED6454"
-                              
+                              this.tagUstensils.add(elem.textContent)
                         }
+                        this.toSearchRecipe()
+
+                        // enlever span de la boite choisi
                         croix.addEventListener('click', () => {
                               if(matchedIngredients.includes(elem.textContent)) {
                                     document.getElementById('all-ingredients').appendChild(elem)
                               } else if (matchedAppareils.includes(elem.textContent)) {
                                     document.getElementById('all-appareils').appendChild(elem)
+                              } else if(subUtensil.includes(elem.textContent)) {
+                                    document.getElementById('all-dishes').appendChild(elem)
                               }
                               document.getElementById('chosen').removeChild(boxForChosen)
                         })
+
                   })
             
 
                   
             })
             
+            recipesArray.forEach(recipe => { 
+                  document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
 
+            })
 
-
+            
       }
 
 }

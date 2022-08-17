@@ -3,7 +3,6 @@ import Recipe from "./scripts/Recipe.js";
 import Search from "./scripts/Search.js";
 
 // DOM 
-const recipesGrid = document.getElementById('recipes-grid')
 let allRecipes = []
 let search;
 
@@ -29,24 +28,26 @@ function displayData(recipes) {
       recipes.forEach((recipe) => {
             const recipeModel = new Recipe(recipe);
             allRecipes.push(recipeModel);
-            const recipeDOM = recipeModel.getRecipeDOM();
-            recipesGrid.appendChild(recipeDOM);
+
       });
 }
 
 function init() {
       displayData(recipes);
       search  = new Search(allRecipes);
+      search.toSearchRecipe()
 }
 
 document.getElementById('search-input').addEventListener('input', (e) => {
       search.toSearchRecipe(e.target.value)
 })
 
-//chercher ingredients
+
+
+//montrer ingredients
 function toShowIngredients() {
       if(!chevronIngredient.classList.contains('fa-chevron-up')) {
-            showedIngredients.style.display = 'flex'
+            showedIngredients.style.display = 'block'
             boxIngredients.style.width = '100%'
             inputIngredients.setAttribute("placeholder", "Rechercher un ingredient")
       } else if(chevronIngredient.classList.contains('fa-chevron-up')) {
@@ -67,15 +68,15 @@ if(chevronIngredient.classList.contains('fa-chevron-up')) {
       })
 }
 
-// chercher appareiles
+// montrer appareiles
 function toShowAppareils() {
       if(!chevronAppareils.classList.contains('fa-chevron-up')) {
-            document.getElementById('all-appareils').style.display = 'flex'
+            showedAppareils.style.display = 'block'
             boxAppareils.style.width = '100%'
             inputAppareils.setAttribute("placeholder", "Rechercher un appareil")
             
       } else if(chevronAppareils.classList.contains('fa-chevron-up')) {
-            document.getElementById('all-appareils').style.display = 'none'
+            showedAppareils.style.display = 'none'
             boxAppareils.style.width = '150px'
             inputAppareils.setAttribute("placeholder", "Appareils")
       }
@@ -91,14 +92,14 @@ if(chevronAppareils.classList.contains('fa-chevron-up')) {
       })
 }
 
-// chercher dishes
+// montrer dishes
 function toShowDishes() {
       if(!chevronDishes.classList.contains('fa-chevron-up')) {
-            document.getElementById('all-dishes').style.display = 'flex'
+            showedDishes.style.display = 'block'
             boxDishes.style.width = '100%'
             inputDishes.setAttribute("placeholder", "Rechercher un ustensile")
       } else if(chevronDishes.classList.contains('fa-chevron-up')) {
-            document.getElementById('all-dishes').style.display = 'none'
+            showedDishes.style.display = 'none'
             boxDishes.style.width = '150px'
             inputDishes.setAttribute("placeholder", "Ustensiles")
       }
@@ -114,15 +115,15 @@ if(chevronDishes.classList.contains('fa-chevron-up')) {
       })
 }
 
-// choisir un tag
 
-// document.querySelector(".span").addEventListener('click', (e) => {
-//       console.log('!!!')
-//       toShowDishes(e)
-//       // let chosenSpan = document.createElement('div')
-//       // chosenSpan.appendChild()
-// })
+
 
 init(); 
 
+/////////////////////
+// const start = () => {
+//       search.toSearchByTag()
+// }
+// start()
+////////////////////////////
 
