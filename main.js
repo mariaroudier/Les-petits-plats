@@ -42,13 +42,23 @@ document.getElementById('search-input').addEventListener('input', (e) => {
       search.toSearchRecipe(e.target.value)
 })
 
+inputIngredients.addEventListener('input', (e) => {
+      search.toSearchRecipe(e.target.value)
+})
 
+inputAppareils.addEventListener('input', (e) => {
+      search.toSearchRecipe(e.target.value)
+})
+
+inputDishes.addEventListener('input', (e) => {
+      search.toSearchRecipe(e.target.value)
+})
 
 //montrer ingredients
 function toShowIngredients() {
       if(!chevronIngredient.classList.contains('fa-chevron-up')) {
             showedIngredients.style.display = 'block'
-            boxIngredients.style.width = '100%'
+            boxIngredients.style.width = 'auto'
             inputIngredients.setAttribute("placeholder", "Rechercher un ingredient")
       } else if(chevronIngredient.classList.contains('fa-chevron-up')) {
             showedIngredients.style.display = 'none'
@@ -120,10 +130,4 @@ if(chevronDishes.classList.contains('fa-chevron-up')) {
 
 init(); 
 
-/////////////////////
-// const start = () => {
-//       search.toSearchByTag()
-// }
-// start()
-////////////////////////////
 

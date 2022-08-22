@@ -34,6 +34,7 @@ h1 {
 }
 
 #search {
+      position: relative;
       width: 100%;
 }
 
@@ -113,6 +114,7 @@ h1 {
 /* Filtres */
 #filtres {
       display: flex;
+      position: absolute;
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: flex-start;
@@ -217,6 +219,7 @@ h1 {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      margin-top: 120px;
       gap: 30px;
 }
 

@@ -435,7 +435,6 @@ export const recipes = [
         "name": "Salade mâchée de patates",
         "servings": 2,
         "ingredients": [
-            // ingred
             {
                 "ingredient": "Mâche",
                 "quantity": 60,

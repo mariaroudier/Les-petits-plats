@@ -60,7 +60,9 @@ export default class Recipe{
                         } 
                   ingredientsP.innerHTML = stringIngredient
             })
+            
             return article;
+            
       }
 
       hasAllIngredients(ingredients) {
@@ -76,4 +78,33 @@ export default class Recipe{
             return result == ingredients.size
       }
       
+      hasAllUstensils(ustensils) {
+            let result = 0
+            
+            ustensils.forEach(ustensil => {
+                  this.ustensils.forEach(elem => {
+                        if(elem.toLowerCase().includes(ustensil.toLowerCase())) {
+                              result++
+                        }
+                  })
+
+            })
+            return result == ustensils.size
+
+      }
+
+
+      // hasAllAppareils(appliance) {
+      //       let result = 0
+      //       console.log(this.appliance)
+      //       if(this.appliance.toLowerCase().includes(appliance.toLowerCase())) {
+      //             result++
+                  
+      //       }
+
+      //       return result == appliance.size
+      // }
+
+
+
 }
