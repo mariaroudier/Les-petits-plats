@@ -43,15 +43,15 @@ document.getElementById('search-input').addEventListener('input', (e) => {
 })
 
 inputIngredients.addEventListener('input', (e) => {
-      search.toSearchRecipe(e.target.value)
+      search.toSearchIngredients(e.target.value)
 })
 
 inputAppareils.addEventListener('input', (e) => {
-      search.toSearchRecipe(e.target.value)
+      search.toSearchAppareils(e.target.value)
 })
 
 inputDishes.addEventListener('input', (e) => {
-      search.toSearchRecipe(e.target.value)
+      search.toSearchUstensils(e.target.value)
 })
 
 //montrer ingredients

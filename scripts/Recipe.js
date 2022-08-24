@@ -94,16 +94,17 @@ export default class Recipe{
       }
 
 
-      // hasAllAppareils(appliance) {
-      //       let result = 0
-      //       console.log(this.appliance)
-      //       if(this.appliance.toLowerCase().includes(appliance.toLowerCase())) {
-      //             result++
-                  
-      //       }
-
-      //       return result == appliance.size
-      // }
+      hasAllAppareils(appliances) {
+            let result = 0
+            appliances.forEach(appliance => {
+                  if(this.appliance.toLowerCase().includes(appliance.toLowerCase())) {
+                  result++
+                  }
+            })
+            
+            
+            return result == appliance.size
+      }
 
 
 
