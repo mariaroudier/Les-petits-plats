@@ -19,18 +19,25 @@ export default class Search {
             let matchedIngredients = []
             let spans = []
             this.displayedRecipes = []
+            // dnndvlkfnvlesv elem
 
             document.getElementById('recipes-grid').innerHTML = ''
             document.getElementById('chosen').innerHTML = ''
             // matching le recipe avec input (titre, description, ingredients)
             if(this.input.length >= 3) {
+
                   this.recipes.forEach(recipe => {
+                        
                         let ingredientsInRecipe = []
                         recipe.ingredients.forEach(elem => {
                               ingredientsInRecipe.push(elem.ingredient)
+                              
                         })
-                        if(recipe.name.toLowerCase().includes(inputValue) || recipe.description.toLowerCase().includes(inputValue) || ingredientsInRecipe.toString().toLowerCase().includes(inputValue)) {
+                        
+                        if(recipe.name.toLowerCase().includes(this.input) || recipe.description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)) {
+                              
                               recipesArray.push(recipe)
+                              
                         }
                   });
             } else {
@@ -41,15 +48,19 @@ export default class Search {
             
             let recipesTab = []
             recipesArray.forEach(recipe => {
+                  
                   if(recipe.hasAllIngredients(this.tagIngredients) 
                   && recipe.hasAllUstensils(this.tagUstensils)
                   // && recipe.hasAllAppareils(this.tagAppareils)
                   ) { // dobavit && avec ustensils etc
+
                         recipesTab.push(recipe)
+                        
                   }
             })
-
+            
             recipesTab.forEach(recipe => {
+
                   recipe.ustensils.forEach(ustensil => {
                         matchedUstensils.push(ustensil)
                   })
@@ -59,8 +70,8 @@ export default class Search {
                   matchedAppareils.push(recipe.appliance)
                   document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
                   
+                  
             })
-
 
             // Set ingredients
             const setIngredients = new Set(matchedIngredients)
@@ -99,6 +110,7 @@ export default class Search {
             
             // design & fonctionalité
             this.tagIngredients.forEach(ingredient => {
+
                   const boxForChosen = document.createElement('div')
                         boxForChosen.classList = "box-for-chosen"
                   const croix = document.createElement('span')
@@ -107,12 +119,15 @@ export default class Search {
                         boxForChosen.textContent = ingredient
                         boxForChosen.appendChild(croix)
                         boxForChosen.style.backgroundColor = "#3282F7"
-
+                        document.getElementById('search-ingredient').value = null
                   croix.addEventListener('click', () => {
                         this.tagIngredients.delete(ingredient)
                         document.getElementById('chosen').removeChild(boxForChosen)
+                        
                         this.toSearchRecipe()
+
                   })
+                  
             })   
             this.tagAppareils.forEach(appareil => {
                   const boxForChosen = document.createElement('div')
@@ -123,7 +138,7 @@ export default class Search {
                         boxForChosen.textContent = appareil
                         boxForChosen.appendChild(croix)
                         boxForChosen.style.backgroundColor = "#68D9A4"
-
+                        document.getElementById('search-appareiles').value = null
                   croix.addEventListener('click', () => {
                         this.tagAppareils.delete(appareil)
                         document.getElementById('chosen').removeChild(boxForChosen)
@@ -139,7 +154,7 @@ export default class Search {
                         boxForChosen.textContent = ustensil
                         boxForChosen.appendChild(croix)
                         boxForChosen.style.backgroundColor = "#ED6454"
-
+                        document.getElementById('search-dishes').value = null
                   croix.addEventListener('click', () => {
                         this.tagUstensils.delete(ustensil)
                         document.getElementById('chosen').removeChild(boxForChosen)
@@ -152,21 +167,25 @@ export default class Search {
             spans.forEach(elem => {
                   elem.addEventListener('click', () => {
                         if (matchedIngredients.includes(elem.textContent)) {
-                              
+                              // console.log(true)
                               this.tagIngredients.add(elem.textContent)
-
+                              // this.toSearchRecipe()
                         } else if (matchedAppareils.includes(elem.textContent)) {
                               this.tagAppareils.add(elem.textContent)
                               
                         } else if (matchedUstensils.includes(elem.textContent)) {
                               this.tagUstensils.add(elem.textContent)
                         }
+
                         this.toSearchRecipe()
                         
                   })
+                  
+                  
             })
 
             this.displayedRecipes = recipesTab
+
             
       }
 
@@ -181,6 +200,7 @@ export default class Search {
 
             })
             this.displayIngredients(matchedIngredients)
+            
       }
 
       toSearchAppareils(inputValue) {
