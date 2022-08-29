@@ -78,6 +78,10 @@ if(chevronIngredient.classList.contains('fa-chevron-up')) {
       })
 }
 
+
+
+
+
 // montrer appareiles
 function toShowAppareils() {
       if(!chevronAppareils.classList.contains('fa-chevron-up')) {

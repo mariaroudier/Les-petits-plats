@@ -29,7 +29,7 @@ export default class Search {
                         recipe.ingredients.forEach(elem => {
                               ingredientsInRecipe.push(elem.ingredient)
                         })
-                        if(recipe.name.toLowerCase().includes(inputValue) || recipe.description.toLowerCase().includes(inputValue) || ingredientsInRecipe.toString().toLowerCase().includes(inputValue)) {
+                        if(recipe.name.toLowerCase().includes(this.input) || recipe.description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)) {
                               recipesArray.push(recipe)
                         }
                   });
@@ -37,14 +37,13 @@ export default class Search {
                   recipesArray = this.recipes
             }
 
-            // // si le recipe a cette ingredient/ustensil/appareil
             
             let recipesTab = []
             recipesArray.forEach(recipe => {
                   if(recipe.hasAllIngredients(this.tagIngredients) 
                   && recipe.hasAllUstensils(this.tagUstensils)
-                  // && recipe.hasAllAppareils(this.tagAppareils)
-                  ) { // dobavit && avec ustensils etc
+                  && recipe.hasAllAppareils(this.tagAppareils)
+                  ) {
                         recipesTab.push(recipe)
                   }
             })
@@ -61,114 +60,18 @@ export default class Search {
                   
             })
 
+            this.displayIngredients(matchedIngredients)
+            this.displayAppareils(matchedAppareils)
+            this.displayUstensils(matchedUstensils)
+            this.displayTags("ingredients")
+            this.displayTags("appareils")
+            this.displayTags("ustensils")
 
-            // Set ingredients
-            const setIngredients = new Set(matchedIngredients)
-            document.getElementById('all-ingredients').innerHTML = ''
-            setIngredients.forEach(elem => {
-                  let spanIngredient = document.createElement('span')
-                  spanIngredient.textContent = elem
-                  spanIngredient.classList = 'span'
-                  spans.push(spanIngredient)
-                  document.getElementById('all-ingredients').appendChild(spanIngredient)
-                        
-            })
             
-            // Set appareiles
-            const setAppareils = new Set(matchedAppareils)
-            document.getElementById('all-appareils').innerHTML = ''
-            setAppareils.forEach(appareil => {
-                  let spanAppareil = document.createElement('span')
-                  spanAppareil.textContent = appareil
-                  spanAppareil.classList = 'span'
-                  spans.push(spanAppareil)
-                  document.getElementById('all-appareils').appendChild(spanAppareil)
-            })
-
-            // Set ustensiles
-
-            const setUstensils = new Set(matchedUstensils)
-            document.getElementById('all-dishes').innerHTML = ''
-            setUstensils.forEach(ustensil => {
-                  let spanUstensil = document.createElement('span')
-                  spanUstensil.textContent = ustensil
-                  spanUstensil.classList = 'span'
-                  spans.push(spanUstensil)
-                  document.getElementById('all-dishes').appendChild(spanUstensil)  
-            })
-            
-            // design & fonctionalité
-            this.tagIngredients.forEach(ingredient => {
-                  const boxForChosen = document.createElement('div')
-                        boxForChosen.classList = "box-for-chosen"
-                  const croix = document.createElement('span')
-                        croix.classList = "fa-regular fa-circle-xmark"
-                  document.getElementById('chosen').appendChild(boxForChosen)
-                        boxForChosen.textContent = ingredient
-                        boxForChosen.appendChild(croix)
-                        boxForChosen.style.backgroundColor = "#3282F7"
-
-                  croix.addEventListener('click', () => {
-                        this.tagIngredients.delete(ingredient)
-                        document.getElementById('chosen').removeChild(boxForChosen)
-                        this.toSearchRecipe()
-                  })
-            })   
-            this.tagAppareils.forEach(appareil => {
-                  const boxForChosen = document.createElement('div')
-                        boxForChosen.classList = "box-for-chosen"
-                  const croix = document.createElement('span')
-                        croix.classList = "fa-regular fa-circle-xmark"
-                  document.getElementById('chosen').appendChild(boxForChosen)
-                        boxForChosen.textContent = appareil
-                        boxForChosen.appendChild(croix)
-                        boxForChosen.style.backgroundColor = "#68D9A4"
-
-                  croix.addEventListener('click', () => {
-                        this.tagAppareils.delete(appareil)
-                        document.getElementById('chosen').removeChild(boxForChosen)
-                        this.toSearchRecipe()
-                  })
-            })      
-            this.tagUstensils.forEach(ustensil => {
-                  const boxForChosen = document.createElement('div')
-                        boxForChosen.classList = "box-for-chosen"
-                  const croix = document.createElement('span')
-                        croix.classList = "fa-regular fa-circle-xmark"
-                  document.getElementById('chosen').appendChild(boxForChosen)
-                        boxForChosen.textContent = ustensil
-                        boxForChosen.appendChild(croix)
-                        boxForChosen.style.backgroundColor = "#ED6454"
-
-                  croix.addEventListener('click', () => {
-                        this.tagUstensils.delete(ustensil)
-                        document.getElementById('chosen').removeChild(boxForChosen)
-                        this.toSearchRecipe()
-                  })
-            })    
-                  
-
-            // ajouter choisi span dans le searche
-            spans.forEach(elem => {
-                  elem.addEventListener('click', () => {
-                        if (matchedIngredients.includes(elem.textContent)) {
-                              
-                              this.tagIngredients.add(elem.textContent)
-
-                        } else if (matchedAppareils.includes(elem.textContent)) {
-                              this.tagAppareils.add(elem.textContent)
-                              
-                        } else if (matchedUstensils.includes(elem.textContent)) {
-                              this.tagUstensils.add(elem.textContent)
-                        }
-                        this.toSearchRecipe()
-                        
-                  })
-            })
-
             this.displayedRecipes = recipesTab
             
       }
+
 
       toSearchIngredients(inputValue) {
             let matchedIngredients = []
@@ -264,5 +167,42 @@ export default class Search {
             })
             return spans
       }
+
+      displayTags(tags){
+            let color = ""
+            let list = new Set()
+            switch(tags) {
+                  case "ingredients" :
+                        color = "#3282F7"
+                        list = this.tagIngredients
+                  break
+                  case "appareils" :
+                        color = "#68D9A4"
+                        list = this.tagAppareils
+                  break
+                  case "ustensils" :
+                        color = "#ED6454"
+                        list = this.tagUstensils
+                  break
+            }
+            list.forEach(tag => {
+                  const boxForChosen = document.createElement('div')
+                        boxForChosen.classList = "box-for-chosen"
+                  const croix = document.createElement('span')
+                        croix.classList = "fa-regular fa-circle-xmark"
+                  document.getElementById('chosen').appendChild(boxForChosen)
+                        boxForChosen.textContent = tag
+                        boxForChosen.appendChild(croix)
+                        boxForChosen.style.backgroundColor = color
+
+                  croix.addEventListener('click', () => {
+                        list.delete(tag)
+                        document.getElementById('chosen').removeChild(boxForChosen)
+                        this.toSearchRecipe()
+                  })
+            }) 
+            
+      }
+
 
 }
