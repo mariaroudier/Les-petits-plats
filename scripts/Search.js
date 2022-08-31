@@ -43,12 +43,7 @@ export default class Search {
                               gridText.textContent = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc."
                         document.getElementById('recipes-grid').appendChild(boxGridText)
                         boxGridText.appendChild(gridText)
-                        // document.getElementById('recipes-grid').style.justifyContent = "center"
-                              
-                   } 
-                   //else{
-                  //       document.getElementById('recipes-grid').style.justifyContent = "space-between"
-                  // }
+                  } 
 
             } else {
                   recipesArray = this.recipes
