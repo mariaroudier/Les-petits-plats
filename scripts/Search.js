@@ -25,53 +25,47 @@ export default class Search {
             document.getElementById('chosen').innerHTML = ''
             // matching le recipe avec input (titre, description, ingredients)
             if(this.input.length >= 3) {
-
-                  this.recipes.forEach(recipe => {
-                        
+                  for (let i = 0; i < this.recipes.length; i++) {
                         let ingredientsInRecipe = []
-                        recipe.ingredients.forEach(elem => {
-                              ingredientsInRecipe.push(elem.ingredient)
-                              
-                        })
-                        
-                        if(recipe.name.toLowerCase().includes(this.input) || recipe.description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)) {
-                              
-                              recipesArray.push(recipe)
-                              
+                        for (let l = 0; l < this.recipes[i].ingredients.length; l++) {
+                              ingredientsInRecipe.push(this.recipes[i].ingredients[l].ingredient)
                         }
-                  });
+                        
+
+                        if(this.recipes[i].name.toLowerCase().includes(this.input) || this.recipes[i].description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)){
+                              recipesArray.push(this.recipes[i])
+                        }
+                  }
             } else {
                   recipesArray = this.recipes
             }
-
-            // // si le recipe a cette ingredient/ustensil/appareil
+            
             
             let recipesTab = []
-            recipesArray.forEach(recipe => {
+            for(let i = 0; i < recipesArray.length; i++) {
                   
-                  if(recipe.hasAllIngredients(this.tagIngredients) 
-                  && recipe.hasAllUstensils(this.tagUstensils)
+                  if(recipesArray[i].hasAllIngredients(this.tagIngredients) 
+                  && recipesArray[i].hasAllUstensils(this.tagUstensils)
                   // && recipe.hasAllAppareils(this.tagAppareils)
                   ) { // dobavit && avec ustensils etc
 
-                        recipesTab.push(recipe)
+                        recipesTab.push(recipesArray[i])
                         
                   }
-            })
-            
-            recipesTab.forEach(recipe => {
-
-                  recipe.ustensils.forEach(ustensil => {
-                        matchedUstensils.push(ustensil)
-                  })
-                  recipe.ingredients.forEach(elem => {
-                        matchedIngredients.push(elem.ingredient)
-                  })
-                  matchedAppareils.push(recipe.appliance)
-                  document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
+                 
+            }
+            console.log(recipesTab)
+            for (let i = 0; i < recipesTab.length; i++) {
+                  for (let l = 0; l < recipesTab[i].ustensils.length; l++){
+                        matchedUstensils.push(recipesTab[i].ustensils[l])
+                  }
+                  for (let b = 0; b < recipesTab[i].ingredients.length; b++){
+                        matchedIngredients.push(recipesTab[i].ingredients[b].ingredient)
+                  }
                   
-                  
-            })
+                  matchedAppareils.push(recipesTab[i].appliance)
+                  document.getElementById('recipes-grid').appendChild(recipesTab[i].getRecipeDOM());
+            }
 
             // Set ingredients
             const setIngredients = new Set(matchedIngredients)
