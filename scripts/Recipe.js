@@ -18,7 +18,7 @@ export default class Recipe{
                   const textOfRecipe = document.createElement('div')
                         textOfRecipe.id = "text-of-recipe"
                         const nameAndTime = document.createElement( 'div' ) 
-                        nameAndTime.id = "name-and-time"     
+                              nameAndTime.id = "name-and-time"     
                               const nameTitle = document.createElement( 'h2' )
                                     nameTitle.id = "name"
                                     nameTitle.textContent = this.name;
@@ -27,8 +27,8 @@ export default class Recipe{
                                     icon.className = "fa-regular fa-clock"
                                     timing.innerHTML = `<i class="fa-regular fa-clock"></i> ${this.time} min`;
                         const ingredientsAndDescription = document.createElement( 'div' );
-                        ingredientsAndDescription.id = "ingredients-and-description"
-                              const ingredientsP = document.createElement( 'p' )
+                              ingredientsAndDescription.id = "ingredients-and-description"
+                              const ingredientsP = document.createElement( 'div' )
                               const descriptionP = document.createElement( 'p' )
                                     descriptionP.innerHTML = this.description;
                                     descriptionP.id = "description-p"
@@ -48,21 +48,33 @@ export default class Recipe{
                   descriptionP.textContent = `${newStr}...`
             } 
             
-            // отобразить правильно ингредиенты в описании
-            const stringIngredient = []
-            this.ingredients.forEach((ingred) => {
-                        if(ingred.hasOwnProperty('quantity') == true && ingred.hasOwnProperty('unit') == true) {
-                              stringIngredient.push(`<br/>${ingred.ingredient}: ${ingred.quantity} ${ingred.unit}`)
-                        } else if(ingred.hasOwnProperty('quantity') == true && ingred.hasOwnProperty('ingredient') == true) {
-                              stringIngredient.push(`<br/>${ingred.ingredient}: ${ingred.quantity}`)
-                        } else if(ingred.hasOwnProperty('ingredient') == true) {
-                              stringIngredient.push(`<br/>${ingred.ingredient}`)
-                        } 
-                  ingredientsP.innerHTML = stringIngredient
+            // montrer les ingredients avec quantity, unit
+            this.ingredients.forEach(ingred => {
+                  
+                  const stringIngredient = document.createElement('div')
+                  ingredientsP.appendChild(stringIngredient)
+
+                  const ingredient = document.createElement('span')
+                  stringIngredient.appendChild(ingredient)
+                        ingredient.textContent = ingred.ingredient
+                        ingredient.style.fontWeight = "700"
+
+                  const quantity = document.createElement('span')
+                  stringIngredient.appendChild(quantity)
+                        quantity.textContent = ": " + ingred.quantity + " "
+
+                  const unit = document.createElement('span')
+                  stringIngredient.appendChild(unit)
+                        unit.textContent = ingred.unit
+
+                  if(ingred.hasOwnProperty('quantity') !== true) {
+                        stringIngredient.removeChild(quantity)
+                  }
+                  if(ingred.hasOwnProperty('unit') !== true) {
+                        stringIngredient.removeChild(unit)
+                  }
             })
-            
             return article;
-            
       }
 
       hasAllIngredients(ingredients) {

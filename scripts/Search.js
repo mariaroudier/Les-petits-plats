@@ -17,11 +17,11 @@ export default class Search {
             let matchedAppareils = []
             let matchedUstensils = []
             let matchedIngredients = []
-            let spans = []
             this.displayedRecipes = []
 
             document.getElementById('recipes-grid').innerHTML = ''
             document.getElementById('chosen').innerHTML = ''
+            
             // matching le recipe avec input (titre, description, ingredients)
             if(this.input.length >= 3) {
                   this.recipes.forEach(recipe => {
@@ -31,8 +31,25 @@ export default class Search {
                         })
                         if(recipe.name.toLowerCase().includes(this.input) || recipe.description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)) {
                               recipesArray.push(recipe)
+
                         }
-                  });
+                  })
+                  
+                  if (recipesArray.length == 0) {
+                        const boxGridText = document.createElement('div')
+                              boxGridText.id = "box-grid-text"
+                              boxGridText.style.display = 'flex'
+                        const gridText = document.createElement('span')
+                              gridText.textContent = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc."
+                        document.getElementById('recipes-grid').appendChild(boxGridText)
+                        boxGridText.appendChild(gridText)
+                        // document.getElementById('recipes-grid').style.justifyContent = "center"
+                              
+                   } 
+                   //else{
+                  //       document.getElementById('recipes-grid').style.justifyContent = "space-between"
+                  // }
+
             } else {
                   recipesArray = this.recipes
             }
