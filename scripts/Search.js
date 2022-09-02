@@ -46,15 +46,15 @@ export default class Search {
                   
                   if(recipesArray[i].hasAllIngredients(this.tagIngredients) 
                   && recipesArray[i].hasAllUstensils(this.tagUstensils)
-                  // && recipe.hasAllAppareils(this.tagAppareils)
-                  ) { // dobavit && avec ustensils etc
+                  && recipe.hasAllAppareils(this.tagAppareils)
+                  ) {
 
                         recipesTab.push(recipesArray[i])
                         
                   }
                  
             }
-            console.log(recipesTab)
+
             for (let i = 0; i < recipesTab.length; i++) {
                   for (let l = 0; l < recipesTab[i].ustensils.length; l++){
                         matchedUstensils.push(recipesTab[i].ustensils[l])
@@ -70,6 +70,8 @@ export default class Search {
             // Set ingredients
             const setIngredients = new Set(matchedIngredients)
             document.getElementById('all-ingredients').innerHTML = ''
+            
+            
             setIngredients.forEach(elem => {
                   let spanIngredient = document.createElement('span')
                   spanIngredient.textContent = elem

@@ -101,7 +101,7 @@ export default class Recipe{
                   result++
                   }
             })
-            return result == appliance.size
+            return result == appliances.size
       }
 
 

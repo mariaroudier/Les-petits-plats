@@ -25,11 +25,16 @@ const showedDishes = document.getElementById('all-dishes')
 
 // montrer toute les recettes sur la page
 function displayData(recipes) {
-      recipes.forEach((recipe) => {
-            const recipeModel = new Recipe(recipe);
+      for (let i = 0; i < recipes.length; i++) {
+            const recipeModel = new Recipe(recipes[i]);
             allRecipes.push(recipeModel);
+      }
+      
+      // recipes.forEach((recipe) => {
+      //       const recipeModel = new Recipe(recipe);
+      //       allRecipes.push(recipeModel);
 
-      });
+      // });
 }
 
 function init() {
