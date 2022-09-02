@@ -8,7 +8,6 @@ export default class Search {
             this.displayedRecipes = []
       }
 
-
       toSearchRecipe(inputValue = null) {
             if(inputValue != null) {
                   this.input = inputValue
@@ -31,10 +30,9 @@ export default class Search {
                         })
                         if(recipe.name.toLowerCase().includes(this.input) || recipe.description.toLowerCase().includes(this.input) || ingredientsInRecipe.toString().toLowerCase().includes(this.input)) {
                               recipesArray.push(recipe)
-
                         }
                   })
-                  
+                  // montrer le message d'erreur
                   if (recipesArray.length == 0) {
                         const boxGridText = document.createElement('div')
                               boxGridText.id = "box-grid-text"
@@ -43,13 +41,12 @@ export default class Search {
                               gridText.textContent = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc."
                         document.getElementById('recipes-grid').appendChild(boxGridText)
                         boxGridText.appendChild(gridText)
-                  } 
-
+                  }
             } else {
                   recipesArray = this.recipes
             }
 
-            
+            // recuperer les recettes correspondant le demande
             let recipesTab = []
             recipesArray.forEach(recipe => {
                   if(recipe.hasAllIngredients(this.tagIngredients) 
@@ -59,7 +56,7 @@ export default class Search {
                         recipesTab.push(recipe)
                   }
             })
-
+            // recuperer les ingredients, appareils et ustensils de recettes dans un array
             recipesTab.forEach(recipe => {
                   recipe.ustensils.forEach(ustensil => {
                         matchedUstensils.push(ustensil)
@@ -68,23 +65,19 @@ export default class Search {
                         matchedIngredients.push(elem.ingredient)
                   })
                   matchedAppareils.push(recipe.appliance)
+                  // mettre la recette dans le grid
                   document.getElementById('recipes-grid').appendChild(recipe.getRecipeDOM());
-                  
             })
-
             this.displayIngredients(matchedIngredients)
             this.displayAppareils(matchedAppareils)
             this.displayUstensils(matchedUstensils)
             this.displayTags("ingredients")
             this.displayTags("appareils")
             this.displayTags("ustensils")
-
-            
             this.displayedRecipes = recipesTab
-            
       }
 
-
+      // chercher un ingredient sur la boite par input
       toSearchIngredients(inputValue) {
             let matchedIngredients = []
             this.displayedRecipes.forEach(recipe => {
@@ -93,23 +86,20 @@ export default class Search {
                               matchedIngredients.push(elem.ingredient)
                         }
                   })
-
             })
             this.displayIngredients(matchedIngredients)
       }
-
+      // chercher un appareil sur la boite par input
       toSearchAppareils(inputValue) {
             let matchedAppareils = []
             this.displayedRecipes.forEach(recipe => {
                   if(recipe.appliance.toLowerCase().includes(inputValue)) {
                         matchedAppareils.push(recipe.appliance)
                   }
-
             })
             this.displayAppareils(matchedAppareils)
-              
       }
-
+      // chercher un ustensil sur la boite par input
       toSearchUstensils(inputValue) {
             let matchedUstensils = []
             this.displayedRecipes.forEach(recipe => {
@@ -120,66 +110,53 @@ export default class Search {
                   })
             })
             this.displayUstensils(matchedUstensils)
-              
       }
-
+      // montrer les ingredients dans la boite de recettes
       displayIngredients(matchedIngredients) {
-            let spans = []
             const setIngredients = new Set(matchedIngredients)
             document.getElementById('all-ingredients').innerHTML = ''
             setIngredients.forEach(elem => {
                   let spanIngredient = document.createElement('span')
                   spanIngredient.textContent = elem
                   spanIngredient.classList = 'span'
+                  document.getElementById('all-ingredients').appendChild(spanIngredient)
                   spanIngredient.addEventListener('click', e => {
                         this.tagIngredients.add(elem)
                         this.toSearchRecipe()
                   })
-                  spans.push(spanIngredient)
-                  document.getElementById('all-ingredients').appendChild(spanIngredient)
-                        
             })
-            return spans
       }
-
+      // montrer les appareils dans la boite de recettes
       displayAppareils(matchedAppareils) {
-            let spans = []
             const setAppareils = new Set(matchedAppareils)
             document.getElementById('all-appareils').innerHTML = ''
             setAppareils.forEach(elem => {
                   let spanAppareil = document.createElement('span')
                   spanAppareil.textContent = elem
                   spanAppareil.classList = 'span'
+                  document.getElementById('all-appareils').appendChild(spanAppareil)
                   spanAppareil.addEventListener('click', e => {
                         this.tagAppareils.add(elem)
                         this.toSearchRecipe()
                   })
-                  spans.push(spanAppareil)
-                  document.getElementById('all-appareils').appendChild(spanAppareil)
-                        
             })
-            return spans
       }
-
+      // montrer les ustensils dans la boite de recettes
       displayUstensils(matchedUstensils) {
-            let spans = []
             const setUstensils = new Set(matchedUstensils)
             document.getElementById('all-dishes').innerHTML = ''
             setUstensils.forEach(elem => {
                   let spanUstensil = document.createElement('span')
                   spanUstensil.textContent = elem
                   spanUstensil.classList = 'span'
+                  document.getElementById('all-dishes').appendChild(spanUstensil)
                   spanUstensil.addEventListener('click', e => {
                         this.tagUstensils.add(elem)
                         this.toSearchRecipe()
-                  })
-                  spans.push(spanUstensil)
-                  document.getElementById('all-dishes').appendChild(spanUstensil)
-                        
+                  })   
             })
-            return spans
       }
-
+      // la creation de design de tags
       displayTags(tags){
             let color = ""
             let list = new Set()
@@ -213,8 +190,5 @@ export default class Search {
                         this.toSearchRecipe()
                   })
             }) 
-            
       }
-
-
 }
