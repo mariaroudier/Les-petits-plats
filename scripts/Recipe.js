@@ -13,25 +13,24 @@ export default class Recipe{
       }
       getRecipeDOM(){ // заполнить карточку с рецептом
             const article = document.createElement( 'article' )
-                  article.id = "carte-recipe"
-                  const photo = document.createElement( 'img' )
+                  article.className = "carte-recipe"
+                  const photo = document.createElement( 'div' )
+                        photo.className = "photo-recipe"
                   const textOfRecipe = document.createElement('div')
-                        textOfRecipe.id = "text-of-recipe"
+                        textOfRecipe.className = "text-of-recipe"
                         const nameAndTime = document.createElement( 'div' ) 
-                              nameAndTime.id = "name-and-time"     
+                              nameAndTime.className = "name-and-time"     
                               const nameTitle = document.createElement( 'h2' )
-                                    nameTitle.id = "name"
                                     nameTitle.textContent = this.name;
                               const timing = document.createElement( 'span' );
                               const icon = document.createElement( 'i' )
                                     icon.className = "fa-regular fa-clock"
                                     timing.innerHTML = `<i class="fa-regular fa-clock"></i> ${this.time} min`;
                         const ingredientsAndDescription = document.createElement( 'div' );
-                              ingredientsAndDescription.id = "ingredients-and-description"
+                              ingredientsAndDescription.className = "ingredients-and-description"
                               const ingredientsP = document.createElement( 'div' )
                               const descriptionP = document.createElement( 'p' )
                                     descriptionP.innerHTML = this.description;
-                                    descriptionP.id = "description-p"
             
             article.appendChild(photo)
             article.appendChild(textOfRecipe)

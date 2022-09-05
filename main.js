@@ -45,13 +45,15 @@ function toShowTagsTableau(type) {
       switch(type) {
             case "ingredients" :
                   if(!chevronIngredient.classList.contains('fa-chevron-up')) {
-                        inputIngredients.setAttribute("placeholder", "Rechercher un ingredient")
+                        inputIngredients.setAttribute("placeholder", "Rechercher un ingrédient")
                         document.getElementById('all-ingredients').style.display = 'block'
                         document.getElementById('box-input-ingredient').style.width = 'auto'
+                        inputIngredients.classList.toggle("text-transparent")
                   } else if(chevronIngredient.classList.contains('fa-chevron-up')){
                         document.getElementById('all-ingredients').style.display = 'none'
                         document.getElementById('box-input-ingredient').style.width = '150px'
                         inputIngredients.setAttribute("placeholder", "Ingredients")
+                        inputIngredients.classList.toggle("text-transparent")
                   }
             break
             case "appareils" :
@@ -59,10 +61,12 @@ function toShowTagsTableau(type) {
                         inputAppareils.setAttribute("placeholder", "Rechercher un appareil")
                         document.getElementById('all-appareils').style.display = 'block'
                         document.getElementById('box-input-appareiles').style.width = 'auto'
+                        inputAppareils.classList.toggle("text-transparent")
                   } else if(chevronAppareils.classList.contains('fa-chevron-up')) {
                         document.getElementById('all-appareils').style.display = 'none'
                         document.getElementById('box-input-appareiles').style.width = '150px'
                         inputAppareils.setAttribute("placeholder", "Appareils")
+                        inputAppareils.classList.toggle("text-transparent")
                   }
             break
             case "ustensils" :
@@ -70,10 +74,12 @@ function toShowTagsTableau(type) {
                         inputDishes.setAttribute("placeholder", "Rechercher un ustensile")
                         document.getElementById('all-dishes').style.display = 'block'
                         document.getElementById('box-input-dishes').style.width = 'auto'
+                        inputDishes.classList.toggle("text-transparent")
                   } else if(chevronDishes.classList.contains('fa-chevron-up')) {
                         document.getElementById('all-dishes').style.display = 'none'
                         document.getElementById('box-input-dishes').style.width = '150px'
                         inputDishes.setAttribute("placeholder", "Ustensiles")
+                        inputDishes.classList.toggle("text-transparent")
                   }
             break
       }
