@@ -79,6 +79,7 @@ export default class Search {
 
       // chercher un ingredient sur la boite par input
       toSearchIngredients(inputValue) {
+            document.getElementById('search-ingredient').classList.remove("text-transparent")
             let matchedIngredients = []
             this.displayedRecipes.forEach(recipe => {
                   recipe.ingredients.forEach(elem => {
@@ -91,6 +92,7 @@ export default class Search {
       }
       // chercher un appareil sur la boite par input
       toSearchAppareils(inputValue) {
+            document.getElementById('search-appareiles').classList.remove("text-transparent")
             let matchedAppareils = []
             this.displayedRecipes.forEach(recipe => {
                   if(recipe.appliance.toLowerCase().includes(inputValue)) {
@@ -101,6 +103,7 @@ export default class Search {
       }
       // chercher un ustensil sur la boite par input
       toSearchUstensils(inputValue) {
+            document.getElementById('search-dishes').classList.remove("text-transparent")
             let matchedUstensils = []
             this.displayedRecipes.forEach(recipe => {
                   recipe.ustensils.forEach(ustensil => {

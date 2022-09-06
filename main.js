@@ -32,12 +32,21 @@ document.getElementById('search-input').addEventListener('input', (e) => {
 })
 inputIngredients.addEventListener('input', (e) => {
       search.toSearchIngredients(e.target.value)
+      if(inputIngredients.value < 1) {
+            inputIngredients.classList.add("text-transparent")
+      }
 })
 inputAppareils.addEventListener('input', (e) => {
       search.toSearchAppareils(e.target.value)
+      if(inputAppareils.value < 1) {
+            inputAppareils.classList.add("text-transparent")
+      }
 })
 inputDishes.addEventListener('input', (e) => {
       search.toSearchUstensils(e.target.value)
+      if(inputDishes.value < 1) {
+            inputDishes.classList.add("text-transparent")
+      }
 })
 
 //montrer tableau avec les tags

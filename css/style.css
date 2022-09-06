@@ -222,6 +222,11 @@ form i {
       width: 380px;
       height: 280px;
 }
+@-moz-document url-prefix() {
+      .carte-recipe {
+            height: 288px;
+      }
+}
 
 .photo-recipe {
       background-color: #ADADAD;
@@ -272,12 +277,14 @@ form i {
       gap: 15px;
       height: 100%;
       margin-top: 10px;
+      overflow: hidden;
 }
 
 .ingredients-and-description p {
       width: 50%;
       margin: 0;
 }
+
 @media screen and (max-width: 768px) {
       #filtres{
             flex-wrap: wrap;
@@ -326,7 +333,7 @@ form i {
             margin-top: 129px;
       }
 
-      #carte-recipe {
+      .carte-recipe {
             width: 354px;
       }
 
