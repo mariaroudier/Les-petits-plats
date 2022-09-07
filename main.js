@@ -96,7 +96,7 @@ function toShowTagsTableau(type) {
       }
 }
 
-hevronIngredient.addEventListener('click', (e) => {
+chevronIngredient.addEventListener('click', (e) => {
       toShowTagsTableau("ingredients")
       chevronIngredient.classList.toggle('fa-chevron-up')
 })
